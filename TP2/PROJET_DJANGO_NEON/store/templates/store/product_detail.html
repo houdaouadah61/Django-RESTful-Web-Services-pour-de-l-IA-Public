@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ product.name }} - Neon Market</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'store/style.css' %}"
+    >
+</head>
+
+<body>
+
+    <header>
+        <div class="menu">
+            <h1>Neon Market</h1>
+
+            <nav>
+                <a href="{% url 'home' %}">Accueil</a>
+                <a href="{% url 'catalog' %}">Catalogue</a>
+                <a href="/admin/">Administration</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-produit">
+
+        <a href="{% url 'catalog' %}" class="retour">
+            ← Retour au catalogue
+        </a>
+
+        <div class="detail-produit">
+
+            <div class="detail-image">
+
+                {% if product.image %}
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+                {% else %}
+                    <div class="sans-image grande-image">
+                        Image du produit
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="detail-contenu">
+
+                <p class="categorie">
+                    {{ product.category.name }}
+                </p>
+
+                <h2>{{ product.name }}</h2>
+
+                <p class="prix detail-prix">
+                    {{ product.price|floatformat:2 }} €
+                </p>
+
+                <h3>Description</h3>
+
+                <p class="description-complete">
+                    {{ product.description }}
+                </p>
+
+                <button class="bouton" type="button">
+                    Ajouter au panier
+                </button>
+
+                <p class="information">
+                    Bouton de démonstration.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Neon Market — Projet Django</p>
+    </footer>
+
+</body>
+</html>
