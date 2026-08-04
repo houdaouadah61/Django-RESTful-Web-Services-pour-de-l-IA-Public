@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Neon Market</title>
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <h1>Neon Market</h1>
+            <nav>
+                <a href="/">Accueil</a>
+                <a href="/">Produits</a>
+                <a href="/admin/">Administration</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="detail-page">
+            <div class="detail-layout">
+                {% if product.image %}
+                    <img class="detail-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div class="sans-image" style="height: 320px; border-radius: 12px;">
+                        Image du produit
+                    </div>
+                {% endif %}
+
+                <div class="detail-content">
+                    <p class="petit-titre">PRODUIT</p>
+                    <h1>{{ product.name }}</h1>
+                    <p class="categorie">{{ product.category.name }}</p>
+                    <p class="price">{{ product.price|floatformat:2 }} €</p>
+                    <p>{{ product.description }}</p>
+                    <a href="/" class="back-link">← Retour au catalogue</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
