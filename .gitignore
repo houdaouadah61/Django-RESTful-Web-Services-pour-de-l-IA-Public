@@ -1,6 +1,8 @@
 .venv/
+venv/
 __pycache__/
 *.py[cod]
+*.pyc
 *.sqlite3
 *.log
 media/

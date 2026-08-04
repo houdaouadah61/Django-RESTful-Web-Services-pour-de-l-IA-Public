@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Neon Market</title>
+
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <div class="menu">
+            <h1>Neon Market</h1>
+
+            <nav>
+                <a href="/">Accueil</a>
+                <a href="#produits">Produits</a>
+                <a href="/admin/">Administration</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="presentation">
+            <div class="presentation-text">
+                <p class="petit-titre">
+                    BOUTIQUE TECHNOLOGIQUE
+                </p>
+
+                <h2>
+                    Découvrez nos produits
+                    <span>nouvelle génération</span>
+                </h2>
+
+                <p>
+                    Neon Market est une boutique spécialisée dans
+                    les produits informatiques, gaming et technologiques.
+                </p>
+
+                <a href="#produits" class="bouton">
+                    Voir les produits
+                </a>
+            </div>
+
+            <div class="presentation-logo">
+                <p>NM</p>
+            </div>
+        </section>
+
+        <section class="catalogue" id="produits">
+
+            <div class="titre-section">
+                <div>
+                    <p class="petit-titre">CATALOGUE</p>
+                    <h2>Nos produits</h2>
+                </div>
+
+                <p>
+                    {{ products|length }} produit(s)
+                </p>
+            </div>
+
+            <div class="liste-produits">
+
+                {% for product in products %}
+
+                    <div class="produit">
+
+                        {% if product.image %}
+
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                            >
+
+                        {% else %}
+
+                            <div class="sans-image">
+                                Image du produit
+                            </div>
+
+                        {% endif %}
+
+                        <div class="contenu-produit">
+
+                            <p class="categorie">
+                                {{ product.category.name }}
+                            </p>
+
+                            <h3>
+                                {{ product.name }}
+                            </h3>
+
+                            <p class="description">
+                                {{ product.description|truncatewords:20 }}
+                            </p>
+
+                            <p class="prix">
+                                {{ product.price|floatformat:2 }} €
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <p>
+                        Aucun produit n’est disponible.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Neon Market — Premier projet Django
+        </p>
+    </footer>
+
+</body>
+
+</html>
